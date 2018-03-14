@@ -2,7 +2,7 @@ const fs = require('fs');
 const ejs = require('ejs');
 const pluralize = require('pluralize');
 
-const names = require('../names');
+const names = require('./names');
 
 module.exports = {
 	load: (path, model, view, attributes = {})=>{
