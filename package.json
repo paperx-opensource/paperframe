@@ -24,5 +24,9 @@
   "bugs": {
     "url": "https://github.com/paperx-opensource/paperframe/issues"
   },
-  "homepage": "https://github.com/paperx-opensource/paperframe#readme"
+  "homepage": "https://github.com/paperx-opensource/paperframe#readme",
+  "dependencies": {
+    "ejs": "^2.5.7",
+    "pluralize": "^7.0.0"
+  }
 }
