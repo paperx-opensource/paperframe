@@ -1,6 +1,6 @@
 {
   "name": "paperframe-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A Rails like SPA framework",
   "main": "src/cli/index.js",
   "directories": {
