@@ -18,6 +18,9 @@
   ],
   "author": "PaperX",
   "license": "ISC",
+  "bin": {
+    "paperframe": "./src/cli/index.js"
+  },
   "bugs": {
     "url": "https://github.com/paperx-opensource/paperframe/issues"
   },
