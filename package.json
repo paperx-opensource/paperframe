@@ -1,0 +1,25 @@
+{
+  "name": "paperframe",
+  "version": "1.0.0",
+  "description": "A Rails like SPA framework",
+  "main": "src/cli/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paperx-opensource/paperframe.git"
+  },
+  "keywords": [
+    "SPA"
+  ],
+  "author": "PaperX",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paperx-opensource/paperframe/issues"
+  },
+  "homepage": "https://github.com/paperx-opensource/paperframe#readme"
+}
