@@ -1,5 +1,5 @@
 {
-  "name": "paperframe-cli",
+  "name": "@paperx/paperframe-cli",
   "version": "0.0.1",
   "description": "A Rails like SPA framework",
   "main": "src/cli/index.js",
@@ -28,5 +28,6 @@
   "dependencies": {
     "ejs": "^2.5.7",
     "pluralize": "^7.0.0"
-  }
+  },
+  "devDependencies": {}
 }
