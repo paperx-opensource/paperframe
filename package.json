@@ -1,5 +1,5 @@
 {
-  "name": "paperframe",
+  "name": "paperframe-cli",
   "version": "1.0.0",
   "description": "A Rails like SPA framework",
   "main": "src/cli/index.js",
