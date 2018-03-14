@@ -10,7 +10,7 @@ let command = process.argv[2];
 
 if (command === 'generate' || command === 'g'){
 	let scope = process.argv[3];
-	let templatesPath = 'bin/paperframe/templates';
+	let templatesPath = 'src/templates';
 
 	if (scope === 'scaffold'){
 		let model = process.argv[4];
