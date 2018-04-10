@@ -1,4 +1,5 @@
 const templates = require('../templates');
+const fs = require('fs');
 const names = require('../names');
 
 module.exports = {
@@ -11,7 +12,7 @@ module.exports = {
 
 		let controllerTemplatePath = `${options.templatesPath}/controllers/${names.upperCamel(view)}Controller.ts.ejs`;
 		if (!fs.existsSync(controllerTemplatePath))
-			controllerTemplatePath = `${options.templatesPath}/controllers/DefaultController.ts.ejs`;
+			controllerTemplatePath = `${options.templatesPath}/controllers/BlankController.ts.ejs`;
 
 		templates.load(controllerTemplatePath, model, view, attributes).then((controllerContent)=>{
 			console.info(`CREATE ${controllerPath}`);
@@ -27,7 +28,7 @@ module.exports = {
 
 		let viewTemplatePath = `${options.templatesPath}/views/${names.snake(view)}.html.ejs.ejs`;
 		if (!fs.existsSync(viewTemplatePath))
-			viewTemplatePath = `${options.templatesPath}/views/default.html.ejs.ejs`;
+			viewTemplatePath = `${options.templatesPath}/views/blank.html.ejs.ejs`;
 
 		templates.load(viewTemplatePath, model, view, attributes).then((viewContent)=>{
 			console.info(`CREATE ${names.snake(viewPath)}`);
@@ -43,7 +44,7 @@ module.exports = {
 
 		let restTemplatePath = `${options.templatesPath}/rest/${names.upperCamel(rest)}Rest.ts.ejs`;
 		if (!fs.existsSync(restTemplatePath))
-			restTemplatePath = `${options.templatesPath}/rest/DefaultRest.ts.ejs`;
+			restTemplatePath = `${options.templatesPath}/rest/BlankRest.ts.ejs`;
 
 		templates.load(restTemplatePath, model, rest, attributes).then((restContent)=>{
 			console.info(`CREATE ${names.upperCamel(restPath)}`);
