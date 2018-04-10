@@ -3,16 +3,18 @@
 const fs = require('fs');
 
 const names = require('./names');
-const templates = require('./templates');
+const generate = require('./generate');
 
-let appPath = 'src/app';
+let options = {
+	appPath: 'src/app',
+	templatesPath: 'src/templates'
+}
+
 let command = process.argv[2];
-
 if (command === 'generate' || command === 'g'){
 	let scope = process.argv[3];
-	let templatesPath = 'src/templates';
 
-	if (scope === 'scaffold'){
+	if (scope === 'pair'){
 		let model = process.argv[4];
 		let view = process.argv[5];
 		let attributes = process.argv.slice(6).map(a => {
@@ -22,36 +24,47 @@ if (command === 'generate' || command === 'g'){
 			}
 		});
 
-		// Controller
-		let controllerDirectory = `${appPath}/controllers/${names.snake(model)}`;
-		let controllerPath = `${controllerDirectory}/${names.upperCamel(model)}${names.upperCamel(view)}Controller.ts`;
-
-		if (!fs.existsSync(controllerDirectory))
-			fs.mkdirSync(controllerDirectory);
-
-		let controllerTemplatePath = `${templatesPath}/controllers/${names.upperCamel(view)}Controller.ts.ejs`;
-		if (!fs.existsSync(controllerTemplatePath))
-			controllerTemplatePath = `${templatesPath}/controllers/BlankController.ts.ejs`;
-
-		templates.load(controllerTemplatePath, model, view, attributes).then((controllerContent)=>{
-			console.info(`CREATE ${controllerPath}`);
-			fs.writeFileSync(controllerPath,controllerContent);
+		generate.controller(model, view, attributes, options);
+		generate.view(model, view, attributes, options);
+	}else if(scope === 'controller'){
+		let model = process.argv[4];
+		let view = process.argv[5];
+		let attributes = process.argv.slice(6).map(a => {
+			return {
+				name: a.split(':')[0],
+				type: a.split(':')[1] || "text"
+			}
 		});
 
-		// View
-		let viewDirectory = `${appPath}/views/${names.snake(model)}`
-		let viewPath = `${names.snake(viewDirectory)}/${names.snake(view)}.html.ejs`
-
-		if (!fs.existsSync(viewDirectory))
-			fs.mkdirSync(viewDirectory);
-
-		let viewTemplatePath = `${templatesPath}/views/${names.snake(view)}.html.ejs.ejs`;
-		if (!fs.existsSync(viewTemplatePath))
-			viewTemplatePath = `${templatesPath}/views/blank.html.ejs.ejs`;
-
-		templates.load(viewTemplatePath, model, view, attributes).then((viewContent)=>{
-			console.info(`CREATE ${names.snake(viewPath)}`);
-			fs.writeFileSync(viewPath,viewContent);
+		generate.controller(model, view, attributes, options);
+	}else if(scope === 'view'){
+		let model = process.argv[4];
+		let view = process.argv[5];
+		let attributes = process.argv.slice(6).map(a => {
+			return {
+				name: a.split(':')[0],
+				type: a.split(':')[1] || "text"
+			}
 		});
+
+		generate.view(model, view, attributes, options);
+	}else if(scope === 'rest'){
+		let model = process.argv[4];
+		let attributes = process.argv.slice(5).map(a => {
+			return {
+				name: a.split(':')[0],
+				type: a.split(':')[1] || "text"
+			}
+		});
+
+		generate.rest(model, attributes, options);
 	}
+}else if(command === 'help'){
+	console.info(`Usage:
+paperframe new APP_PATH # Create an Paperframe Application
+paperframe generate controller MODEL VIEW [ATTRIBUTE:TYPE] # Create a ModuleController file
+paperframe generate view MODEL VIEW [ATTRIBUTE:TYPE] # Create a Template file
+paperframe generate rest MODEL [ATTRIBUTE:TYPE] # Create a Rest file
+paperframe generate pair MODEL VIEW [ATTRIBUTE:TYPE] # Create a ModuleController and Template files
+	`);
 }
